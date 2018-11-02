@@ -1,5 +1,3 @@
-import { url } from "inspector";
-
 class Helper {
     static baseURL() {
         return "https://api.foursquare.com/v2"
@@ -11,7 +9,7 @@ class Helper {
             v: "20181031"
     };
     return Object.keys(keys)
-    .displaymap(key => `${key}=${keys[key]}`)
+    .map(key => `${key}=${keys[key]}`)
     .join("&");
 }
 static urlBuilder(urlPrams){
@@ -19,7 +17,7 @@ static urlBuilder(urlPrams){
         return "";
     }
     return Object.keys(urlPrams)
-    .displaymap(key => `${key}=${urlPrams[key]}`)
+    .map(key => `${key}=${urlPrams[key]}`)
     .join("&");
 }
 static headers(){
@@ -30,7 +28,7 @@ static headers(){
 static simpleFetch(endPoint,method,urlPrams) {
     let requestData = {
         method, 
-        header: Helper.header()
+        headers: Helper.headers()
     };
     return fetch(
         `${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(
