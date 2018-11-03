@@ -11,17 +11,15 @@ class App extends Component {
       venues: [],
       markers: [],
       center: [],
-      zoom: 13
+      zoom: 11
     };
   }
 
   componentDidMount(){
     SquareAPI.search({
-      query: "winery",
-      intent:"browse",
-      radius:"50000",
-      near: "Cambria", 
-      limit: 10 
+      near: "San Luis Obispo", 
+      query: "coffee",
+      limit: 5 
     }).then(results => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;
@@ -31,6 +29,7 @@ class App extends Component {
           lng: venue.location.lng, 
           isOpen: false,
           inVisible: true
+          
         };
       });
       this.setState({ venues, center, markers });
@@ -40,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-       <Map />
+       <Map {...this.state} />
       </div>
     );
   }
