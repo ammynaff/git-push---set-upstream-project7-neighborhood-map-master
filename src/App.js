@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import Map from './components/Map.js';
-import SquareAPI from "./API"
+import FourSquareAPI from "./API"
 
 class App extends Component {
   constructor() {
@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    SquareAPI.search({
+    FourSquareAPI.search({
       near: "San Luis Obispo", 
       query: "coffee",
       limit: 5 
