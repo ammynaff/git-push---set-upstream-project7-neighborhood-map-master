@@ -16,7 +16,7 @@ withGoogleMap(props => (
   zoom={props.zoom}
   defaultCenter={{ lat: 35.2828, lng: -120.6596}}
    
-  >
+>
 
     {props.markers &&
     props.markers

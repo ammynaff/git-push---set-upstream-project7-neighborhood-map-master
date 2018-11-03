@@ -33,7 +33,7 @@ class App extends Component {
     FourSquareAPI.search({
       near: "San Luis Obispo", 
       query: "coffee",
-      limit: 5 
+      limit: 10 
     }).then(results => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;
@@ -42,7 +42,7 @@ class App extends Component {
           lat: venue.location.lat,
           lng: venue.location.lng, 
           isOpen: false,
-          inVisible: true
+          isVisible: true
           
         };
       });
