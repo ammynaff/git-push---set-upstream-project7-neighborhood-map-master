@@ -3,7 +3,7 @@ import {
     withScriptjs, 
     withGoogleMap, 
     GoogleMap, 
-    Marker, 
+    Marker 
 }   from "react-google-maps";
 
 /*Used documentation step 4 for installing map*/
