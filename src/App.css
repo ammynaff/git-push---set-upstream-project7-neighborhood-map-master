@@ -5,7 +5,29 @@
   display: flex;
   flex-flow: row nowrap;
 }
+  
+  .sideBar {
+    width: 25%;
+  }
 
+    #search {
+    width: 100%;
+    height: 2rem;
+    font-size: 1rem;
+    }
+
+  .venueList {
+      padding: 1rem;
+  }
+
+  .listItem {
+      list-style: none;
+      font-size: 1rem;
+      padding: .5rem;
+      margin-top: 1rem;
+      box-shadow: -5px 1px 12px 3px #888888;
+      cursor: pointer;
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

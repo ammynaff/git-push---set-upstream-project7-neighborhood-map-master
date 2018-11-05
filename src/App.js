@@ -3,6 +3,10 @@ import React, {Component} from 'react';
 import './App.css';
 import Map from './components/Map.js';
 import FourSquareAPI from './API';
+import SideBar from './components/SideBar';
+
+//Reviewers please use your own API key, insert line 65 Maps.js
+//contributions to my code, Forrest Walker(youtube walkthrough),
 
 class App extends Component {
   constructor () {
@@ -11,7 +15,10 @@ class App extends Component {
       venues: [],
       markers: [],
       center: [],
-      zoom: 13,
+      zoom: 11,
+      updateSuperState: obj => {
+        this.setState (obj);
+      },
     };
   }
   closeAllMarkers = () => {
@@ -35,12 +42,16 @@ class App extends Component {
       console.log (newVenue);
     });
   };
-
+  handleListItemClick = venue => {
+    //InfoWindow pops up on ListView click
+    const marker = this.state.markers.find (marker => marker.id === venue.id);
+    this.handleMarkerClick (marker);
+  };
   componentDidMount () {
     FourSquareAPI.search ({
       near: 'San Luis Obispo, CA',
-      query: 'coffee',
-      limit: 9,
+      query: 'winery',
+      limit: 10,
     }).then (results => {
       const {venues} = results.response;
       const {center} = results.response.geocode.feature.geometry;
@@ -60,6 +71,10 @@ class App extends Component {
   render () {
     return (
       <div className="App">
+        <SideBar
+          {...this.state}
+          handleListItemClick={this.handleListItemClick}
+        />
         <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
       </div>
     );

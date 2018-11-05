@@ -1,4 +1,6 @@
+/*global google*/ //corrects error google not defined
 import React, {Component} from 'react';
+
 import {
   withScriptjs,
   withGoogleMap,
@@ -20,7 +22,7 @@ const MyMapComponent = withScriptjs (
       {props.markers &&
         props.markers
           .filter (marker => marker.isVisible)
-          .map ((marker, index) => {
+          .map ((marker, index, Array) => {
             const venueInfo = props.venues.find (
               venue => venue.id === marker.id
             );
@@ -29,6 +31,11 @@ const MyMapComponent = withScriptjs (
                 key={index}
                 position={{lat: marker.lat, lng: marker.lng}}
                 onClick={() => props.handleMarkerClick (marker)}
+                animation={
+                  Array.length === 1
+                    ? google.maps.Animation.BOUNCE
+                    : google.maps.Animation.DROP
+                }
               >
                 {marker.isOpen &&
                   venueInfo.bestPhoto &&
@@ -54,9 +61,9 @@ export default class Map extends Component {
     return (
       <MyMapComponent
         {...this.props}
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key="
+        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAeqUBx9qm3mLGGjVh56CC9FItEbjZWLyw"
         loadingElement={<div style={{height: '100%'}} />}
-        containerElement={<div style={{height: '100%', width: '100%'}} />}
+        containerElement={<div style={{height: '100%', width: '75%'}} />}
         mapElement={<div style={{height: '100%'}} />}
       />
     );
