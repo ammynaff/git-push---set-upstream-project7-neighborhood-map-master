@@ -1,3 +1,19 @@
+h1 {
+  color: #faf8f1;
+  font-size: 20px;
+  margin: center;
+  text-align: center;
+}
+
+.banner {
+  padding-bottom: 5px;
+  font-size: 20pt;
+  background-color: #848788;
+  color: #faf8f1;
+  display: inline-flex;
+
+}
+
 .App {
   text-align: center;
   height: 100vh;
@@ -6,54 +22,31 @@
   flex-flow: row nowrap;
 }
   
-  .sideBar {
-    width: 25%;
+  .listView {
+    width: 20%;
   }
 
-    #search {
-    width: 100%;
-    height: 2rem;
-    font-size: 1rem;
-    }
+  #search {
+  width: 85%;
+  height: 2rem;
+  font-size: 1rem;
+  }
 
   .venueList {
-      padding: 1rem;
+      padding: .1rem;
   }
 
   .listItem {
       list-style: none;
       font-size: 1rem;
-      padding: .5rem;
+      padding: 1rem;
       margin-top: 1rem;
       box-shadow: -5px 1px 12px 3px #888888;
       cursor: pointer;
+      
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+

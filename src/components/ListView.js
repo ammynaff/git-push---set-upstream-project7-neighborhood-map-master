@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import VenueLists from './VenueList';
 
-export default class SideBar extends Component {
+export default class ListView extends Component {
   constructor () {
     super ();
     this.state = {
-      query: '',
-      venues: [],
+      query: '', //passed to handleFilterVenues
+      venues: [], //this array contains results for searches
     };
   }
   handleFilterVenues = () => {
@@ -38,8 +38,11 @@ export default class SideBar extends Component {
 
   render () {
     return (
-      <div className="sideBar">
+      <div className="listView">
+
         <input
+          role="application"
+          aria-label="map"
           type={'search'}
           id={'search'}
           placeholder={'Filter Venues'}

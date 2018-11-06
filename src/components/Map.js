@@ -9,16 +9,17 @@ import {
   InfoWindow,
 } from 'react-google-maps';
 
-/* Used documentation step 4 for installing map */
+/* Used documentation step 4 for installing map, 
+source: https://tomchentw.github.io/react-google-maps/#installation */
 
 const MyMapComponent = withScriptjs (
   withGoogleMap (props => (
     <GoogleMap
-      defaultZoom={15}
+      defaultZoom={8}
       zoom={props.zoom}
       defaultCenter={{lat: 35.2828, lng: -120.6596}}
     >
-
+      {/*Added markers to map, plus animation*/}
       {props.markers &&
         props.markers
           .filter (marker => marker.isVisible)
@@ -41,11 +42,13 @@ const MyMapComponent = withScriptjs (
                   venueInfo.bestPhoto &&
                   <InfoWindow>
                     <React.Fragment>
-                      <img
-                        src={`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`}
-                        alt="Venue"
-                      />
-                      <p>{venueInfo.name}</p>
+                      <div>
+                        <img
+                          src={`${venueInfo.bestPhoto.prefix}150x150${venueInfo.bestPhoto.suffix}`}
+                          alt={venueInfo.name + 'venue picture'}
+                        />
+                        <p>{venueInfo.name}</p>
+                      </div>
                     </React.Fragment>
                   </InfoWindow>}
               </Marker>
@@ -57,6 +60,12 @@ const MyMapComponent = withScriptjs (
 );
 
 export default class Map extends Component {
+  componentDidMount () {
+    window.gm_authFailure = () => {
+      alert ('Error: Failed to get Google map.');
+      console.log ('Error: Failed to get Google map.');
+    };
+  }
   render () {
     return (
       <MyMapComponent

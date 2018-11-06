@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-
 import './App.css';
 import Map from './components/Map.js';
 import FourSquareAPI from './API';
-import SideBar from './components/SideBar';
+import SideBar from './components/ListView';
 
-//Reviewers please use your own API key, insert line 65 Maps.js
-//contributions to my code, Forrest Walker(youtube walkthrough),
+/*contributions for my code, Forrest Walker(youtube walkthrough, 
+plus many more, chech contributions github)*/
 
 class App extends Component {
   constructor () {
@@ -21,6 +20,7 @@ class App extends Component {
       },
     };
   }
+  //markers close when a marker is clicked, handleMarkerClick
   closeAllMarkers = () => {
     const markers = this.state.markers.map (marker => {
       marker.isOpen = false;
@@ -28,7 +28,7 @@ class App extends Component {
     });
     this.setState ({markers: Object.assign (this.state.markers, markers)});
   };
-
+  //handleMarkerClick will find correct marker for VenueList name clicked
   handleMarkerClick = marker => {
     this.closeAllMarkers ();
     marker.isOpen = true;
@@ -38,20 +38,18 @@ class App extends Component {
     FourSquareAPI.getVenueDetails (marker.id).then (res => {
       const newVenue = Object.assign (venue, res.response.venue);
       this.setState ({venues: Object.assign (this.state.venues, newVenue)});
-
-      console.log (newVenue);
     });
   };
   handleListItemClick = venue => {
-    //InfoWindow pops up on ListView click
+    //handles InfoWindow ListView click
     const marker = this.state.markers.find (marker => marker.id === venue.id);
     this.handleMarkerClick (marker);
   };
   componentDidMount () {
     FourSquareAPI.search ({
-      near: 'San Luis Obispo, CA',
-      query: 'winery',
-      limit: 10,
+      near: 'San Luis Obispo',
+      query: 'wineries',
+      limit: 8,
     }).then (results => {
       const {venues} = results.response;
       const {center} = results.response.geocode.feature.geometry;
@@ -65,12 +63,16 @@ class App extends Component {
         };
       });
       this.setState ({venues, center, markers});
-      console.log (results);
     });
   }
+
   render () {
     return (
       <div className="App">
+        <div>
+          <button aria-label="search" onClick={this.handleMarkerClick} />
+
+        </div>
         <SideBar
           {...this.state}
           handleListItemClick={this.handleListItemClick}

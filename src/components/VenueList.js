@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ListItem from './ListItem';
 
+//maps over list item data when click in ListView
 export default class VenueList extends Component {
   render () {
     return (

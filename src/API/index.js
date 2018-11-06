@@ -1,10 +1,14 @@
+//Documentation https://foursquare.com/developers/apps
 class Helper {
   static baseURL () {
     return 'https://api.foursquare.com/v2';
   }
   static auth () {
+    //Foursquare authorization keys
     const keys = {
-      v: '20181101',
+      client_id: 'FU3TJU4ZYJD50M0NPLYKQGDAIFOVNBVBBQVPBTSJSEHRLB3P',
+      client_secret: '454XLKTZJXLRSWVOQOOVWXXZIKV4WPXBVLMAVDIRK3GBBL2M',
+      v: '20181105',
     };
     return Object.keys (keys).map (key => `${key}=${keys[key]}`).join ('&');
   }
@@ -21,6 +25,7 @@ class Helper {
       Accept: 'application/json',
     };
   }
+  //fetch params for venue
   static simpleFetch (endPoint, method, urlPrams) {
     let requestData = {
       method,
@@ -32,6 +37,11 @@ class Helper {
     ).then (res => res.json ());
   }
 }
+
+/* code below exports a class used for 
+endpoints designated to venue data
+*/
+
 export default class FourSquareAPI {
   static search (urlPrams) {
     return Helper.simpleFetch ('/venues/search', 'GET', urlPrams);
