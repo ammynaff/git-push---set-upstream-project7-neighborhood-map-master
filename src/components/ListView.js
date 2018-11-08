@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import VenueLists from './VenueList';
+import logo from './pizza-logo.svg';
 
 export default class ListView extends Component {
   constructor () {
@@ -9,6 +10,7 @@ export default class ListView extends Component {
       venues: [], //this array contains results for searches
     };
   }
+
   handleFilterVenues = () => {
     if (this.state.query.trim () !== '') {
       const venues = this.props.venues.filter (venue =>
@@ -38,14 +40,21 @@ export default class ListView extends Component {
 
   render () {
     return (
-      <div className="listView">
-
+      <div className="listView" aria-label="List of Venues" tabIndex="0">
+        <header className="App-header">
+          <img
+            src={logo}
+            className="App-logo"
+            alt="pizza logo"
+            aria-label="Pizza Tribe Logo"
+          />
+        </header>
         <input
-          role="application"
-          aria-label="map"
+          className="searchBox"
+          aria-label="Search by Title"
           type={'search'}
           id={'search'}
-          placeholder={'Filter Venues'}
+          placeholder={'Search by title'}
           onChange={this.handleChange}
         />
 

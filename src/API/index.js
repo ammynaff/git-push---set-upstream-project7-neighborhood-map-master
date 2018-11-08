@@ -1,6 +1,7 @@
-//Documentation https://foursquare.com/developers/apps
+//Followed Forrest Walker and Documentation https://foursquare.com/developers/apps
 class Helper {
   static baseURL () {
+    ////Fetch venue details from Foursquare
     return 'https://api.foursquare.com/v2';
   }
   static auth () {
@@ -8,7 +9,7 @@ class Helper {
     const keys = {
       client_id: 'FU3TJU4ZYJD50M0NPLYKQGDAIFOVNBVBBQVPBTSJSEHRLB3P',
       client_secret: '454XLKTZJXLRSWVOQOOVWXXZIKV4WPXBVLMAVDIRK3GBBL2M',
-      v: '20181105',
+      v: '20181031',
     };
     return Object.keys (keys).map (key => `${key}=${keys[key]}`).join ('&');
   }

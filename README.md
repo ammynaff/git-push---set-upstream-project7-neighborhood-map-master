@@ -1,10 +1,8 @@
 ## Instructions
 
 After cloning or downloading this file and you are in the project folder, you can run:
-`npm install` This loads all the dependencies for the project.
-`npm start` This will open a local server with a message:
-
-A local server will open with the following message:
+`npm install`  This loads all the dependencies for the project.
+`npm start`  A local server will open with the following message:
 
 `Compiled successfully!`
 `The app is running at:`
@@ -41,6 +39,7 @@ Launches the test runner in the interactive watch mode.
 See the section about running tests for more information.
 
 ##npm run build
+Creat-react-app builds the service worker after you run npm build.
 Builds the app for production to the build folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
+
 import Map from './components/Map.js';
 import FourSquareAPI from './API';
-import SideBar from './components/ListView';
+import ListView from './components/ListView';
 
 /*contributions for my code, Forrest Walker(youtube walkthrough, 
 plus many more, chech contributions github)*/
@@ -20,6 +21,7 @@ class App extends Component {
       },
     };
   }
+
   //markers close when a marker is clicked, handleMarkerClick
   closeAllMarkers = () => {
     const markers = this.state.markers.map (marker => {
@@ -28,13 +30,14 @@ class App extends Component {
     });
     this.setState ({markers: Object.assign (this.state.markers, markers)});
   };
-  //handleMarkerClick will find correct marker for VenueList name clicked
+  //opens marker venue when clicked
   handleMarkerClick = marker => {
-    this.closeAllMarkers ();
+    this.closeAllMarkers (); //closes open marker when another is clicked
     marker.isOpen = true;
     this.setState ({markers: Object.assign (this.state.markers, marker)});
     const venue = this.state.venues.find (venue => venue.id === marker.id);
 
+    //call foursquare for venue details
     FourSquareAPI.getVenueDetails (marker.id).then (res => {
       const newVenue = Object.assign (venue, res.response.venue);
       this.setState ({venues: Object.assign (this.state.venues, newVenue)});
@@ -45,14 +48,17 @@ class App extends Component {
     const marker = this.state.markers.find (marker => marker.id === venue.id);
     this.handleMarkerClick (marker);
   };
+
   componentDidMount () {
     FourSquareAPI.search ({
-      near: 'San Luis Obispo',
-      query: 'wineries',
-      limit: 8,
+      near: 'San Luis Obispo, CA',
+      query: 'pizza',
+      limit: 10,
     }).then (results => {
+      //pull results from foursquare for venues and centering map
       const {venues} = results.response;
       const {center} = results.response.geocode.feature.geometry;
+      //handling details for markers in map
       const markers = venues.map (venue => {
         return {
           lat: venue.location.lat,
@@ -63,20 +69,18 @@ class App extends Component {
         };
       });
       this.setState ({venues, center, markers});
+      console.log (results);
     });
   }
 
   render () {
     return (
-      <div className="App">
-        <div>
-          <button aria-label="search" onClick={this.handleMarkerClick} />
-
-        </div>
-        <SideBar
+      <div className="App" tabIndex="0">
+        <ListView
           {...this.state}
           handleListItemClick={this.handleListItemClick}
         />
+        {/*spread out the state to get map object*/}
         <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
       </div>
     );
